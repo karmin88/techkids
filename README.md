@@ -1,47 +1,37 @@
-<h1 align="center"> MedicAid Forum </h1> <br>
+<h1 align="center"> TechKids Forum </h1> <br>
 
 
 <h3 align="center">
-  A community forum to help people with their health related issue. Built with Python/Django.
+  Community Forum allows users from around the world to connect, together discussing and sharing topics on Kids and Technologies.
 </h3>
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation Process](#installation-process)
-- [Project Demo](#project-demo)
-- [Feedback](#feedback)
 
 ## Introduction
-
-MedicAid Forum is a reddit like community app. Here people can search previously discussed topics. Create new topic and provide answer to an existing topic. Upvote/Downvote any topic (similar to YouTube system). View activity history. It has an Integrated Blog. Built with Python/Django and 100% free to use.
+This project is developed in conjunction with the subject SKIH3023 Collaborative and Social Computing in our Semester 05.
+In TechKids Forum, users can view all available forum topics and blog topics. However, further interaction will require users to create an account with us and log in to allow further interactions including viewing, voting, commenting, and searching forum blog topics. User Personalized Dashboard will also allow the users to have their accounts tailored to themselves.
 
 ## Features
 
-A few of the things you can do with MedicAid:
+**Functionality available:**
 
-* Signup as a Doctor or General User
-* Search and read previously discussed topics
-* Create a new topic
-* Provide answer to an existing topic
-* Upvote any topic
-* Downvote any topic
-* View activity history (created topics/answered topics)
-* Read blog posts
+* Sign Up and Login
+* Personalized Identity and Information
+* View and interact with existing forum topics
+* Create new forum topics
+* View Blog topics
+* View history activities
+
 
 ## Installation Process
 
 **Installation Process (Windows)**
 
-1. Create a Virtual Environment `virtualenv projectenv`
-2. Go To environment Directory `cd projectenv/scripts`
-3. Activate Virtual Environment `activate`
-4. Clone This Project `git clone https://github.com/mahmud-sajib/Django-Forum.git`
-5. Go To Project Directory `cd Django-Forum`
-6. Install Required Package `pip install -r requirements.txt`
-7. Migrate Database `python manage.py migrate`
-8. Finally Run The Project `python manage.py runserver`
+1. Go to the specific directory `cd Filename`
+2. Create a Virtual Environment `python -m venv venv`
+3. Activate Virtual Environment `.\venv\Scripts\activate`
+4. Install Required Package `pip install -r requirements.txt`
+5. Migrate Database `python manage.py migrate`
+6. Run Project `python manage.py runserver`
 
 ## Project Demo
 
