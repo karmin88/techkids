@@ -1,0 +1,85 @@
+<!--Change to forum-->
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="dx-main" >
+    <section id="hero" class="d-flex align-items-center" >
+
+        <div class="container">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center">
+                    <img src="{% static 'images/logow.png' %}" alt="Your Image" style="width: 30vw;">
+                   
+        
+                    {% if user.is_authenticated %}
+                    <div class="welcome" style="  background-color: #d1d1d1; border-radius: 15px; padding: 20px 40px;">
+                    <h1 style="margin: 30px 10px; text-align: center;">WELCOME, <span style="color: #0073ff; font-weight: bold;">{{ user.username }}</span>.</h1>
+                   
+                    <div class="row">
+                        <a href="{% url 'forum' %}">
+                            <button type="button" class="btn btn-primary  btn-custom">
+                                Forum
+                            </button>
+                        </a><a href="{% url 'blog' %}">
+                            <button type="button" class="btn btn-primary  btn-custom" >
+                                Blog
+                            </button>
+                        </a>
+                    </div>
+                    </div>
+                    {% else %}
+
+                    <h2 data-aos="fade-up" data-aos-delay="400" class="text-center">Technology Evolvement Among Kids, The Ultimate Transformation Era</h2>
+
+                    <div class="row">
+                        <a href="{% url 'login' %}">
+                            <button type="button" class="btn btn-primary btn-custom" >
+                                Log In
+                            </button>
+                        </a>
+                        <a href="{% url 'register' %}">
+                            <button type="button" class="btn btn-primary btn-custom" >
+                                Sign Up
+                            </button>
+                        </a>
+                    </div>
+
+                
+                    
+                    {% endif %}
+        
+                </div>
+        
+                <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex justify-content-center align-items-center" data-aos="fade-left" data-aos-delay="200">
+                    <img src="{% static 'images/logoarrow.png' %}" alt="Your Image" style="width: 40vw;">
+                </div>
+            </div>
+        </div>
+        
+    
+      </section><!-- End Hero -->
+
+   
+<!--CSS Styling-->
+<style>
+    /* Add this to your CSS or style tag */
+    .btn-custom {
+        margin: 10px 30px;
+        width: 150px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease; /* Add smooth transition */
+    }
+
+    .btn-custom:hover {
+        background-color: #99a0a8; /* Change color on hover */
+        color: #fff; /* Change text color on hover */
+    }
+</style>
+
+{% endblock content %}
+
+
+

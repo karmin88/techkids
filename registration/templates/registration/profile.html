@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="dx-main pb-100 bg-grey-6">
+    <header class="header" style="margin: 30px;">
+        <div class="container">
+            <h1 style="text-align:center; margin:auto; color:#0019ff; font-weight:bold; padding:20px 40px; background-color:#9cff1e; border:1px solid #fff; inline-size:fit-content; border-radius: 10px;">
+                PROFILE INFORMATION</h1>
+        </div>
+    </header>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="row">
+                    <div class="col-lg-12">
+                <div class="messagebar" style="margin: 10px;">
+                    {% if messages %}
+                    <div class="register-msg">
+                        {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch justify-content-center" style="margin-bottom: 20px;">
+                <div class="dx-box-decorated ">
+                    <div class="dx-box-content text-center flex-grow-1">
+                        <h2 class="h4">Profile Picture</h2>
+                        <div class="dx-comment-img">
+                            <img style="width: 200px; height:200px; margin-bottom: 20px;" src="{{ user.author.profile_pic.url }}" alt=""
+                                class="rounded-circle">
+                        </div>
+                        <div class="row text-center d-flex flex-column align-items-center" style="margin-top: 20px;">
+                            <i class="fa fa-bolt" style="margin: 0px 10px;" aria-hidden="true"></i>
+                            {% if user.author.is_doctor %}
+                                Certified Expert
+                            {% else %}
+                                General User
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12" style="margin-bottom: 20px;"">
+                <div class="dx-box-decorated">
+                    <div class="dx-box-content flex-grow-1">
+                        <h2 class="h4" style="margin-left: 25px;">Profile Information</h2>
+                        <form id="profile-form" method="POST" action="" class="dx-form" enctype="multipart/form-data">
+                            <div class="dx-box-content">
+                                <p>Username: {{ user.username }}</p>
+                                {% csrf_token %}
+                                {{ user_form.as_p }}
+                                {{ profile_form.as_p }}
+                                <div class="dx-form-group">
+                                    <input type="submit" value="Save Changes" class="dx-btn dx-btn-xl dx-btn-block">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+            </div>
+        </div>
+   
+</div>
+{% endblock content %}
+
+<!--
+
+     <div class="col-lg-4">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i> {{ user.username }}
+                                </div>
+                                <div class="col-lg-4">
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i> {{ user.email }}
+                                </div>
+                                
+-->

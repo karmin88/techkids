@@ -1,0 +1,156 @@
+<!--Change to forum-->
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="dx-main">
+    <header class="dx-header dx-box-1">
+        <div class="container">
+            <div class="bg-image bg-image-parallax">
+                <img src="{% static 'images/background.png' %}" class="jarallax-img" alt="">
+                <div style="background-color: rgba(27, 27, 27, .8);"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <h1 class="h2 mb-30 text-white text-center">Welcome to the family, <br>where we
+                        <span style="color: #9cff1e ; font-weight: bold;">share</span>,
+                        <span style="color: #9cff1e ; font-weight: bold;">discuss</span> and
+                        <span style="color: #9cff1e ; font-weight: bold;">solve</span>
+                        all gadget kids problem.
+                    </h1>
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'user-post' %}">
+                        <button type="button" class="btn btn-primary" style="display: block; margin: 10px auto;">
+                            Post your Questions
+                        </button>
+                    </a>
+                    {% else %}
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <div class="dx-separator"></div>
+
+    <!--Search Bar-->
+    <div class="col-lg-9 mx-auto" style="margin: 30px;">
+        {% if messages %}
+
+        <div class="search-msg">
+            {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="search-bar" style="  box-shadow: 0 0 10px rgba(0,0,0, 0.5);">
+            <form action="{% url 'search-result' %}" class="dx-form dx-form-group-inputs">
+                <input type="text" name="q" value="" class="form-control" style="background-color: #fff;"
+                    placeholder="Search your keyword / topics / tags">
+                <button type="submit" class="dx-btn dx-btn-lg">Search</button>
+            </form>
+        </div>
+    </div>
+    <!--End Search Bar-->
+
+    <div class="dx-box-5 pb-100 bg-grey-6">
+        <div class="container">
+            <div class="row vertical-gap md-gap">
+                <div class="col-lg-8">
+                    <div class="dx-box dx-box-decorated">
+                        <div class="dx-blog-post">
+                            <div class="dx-blog-post-box pt-30 pb-30">
+                                <h2 class="h4 mnt-5 mb-9">Forum Topics</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="dx-table dx-table-default">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">Tag</th>
+                                            <th scope="col">Answers</th>
+                                            <th scope="col">Post Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for post in user_posts %}
+                                            <tr>
+                                                <th scope="row">
+                                                    <a href="{% url 'topic-detail' post.id %}" class="dx-table-default-title">{{ post.title }}</a>
+                                                    <p class="mb-0">{{ post.description }}</p>
+                                                </th>
+                                                <!-- Update this part to include a link to the forum with the specific tag -->
+                                                <td><a href="{% url 'forum_with_tag' tag=post.tag %}">{{ post.tag }}</a></td>
+                                    
+                                                <td>{{ post.answer_count }}</td>
+                                    
+                                                <td class="dx-table-lastPost">
+                                                    <div class="dx-table-default-info">
+                                                        <p class="mb-0">by 
+                                                            <span style="color:rgb(212, 59, 59);">{{ post.author.user }}</span>
+                                                            <br><span class="dib">{{ post.date_created }}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="dx-sticky dx-sidebar" data-sticky-offsetTop="120" data-sticky-offsetBot="40">
+
+
+                        <div class="dx-widget dx-box dx-box-decorated">
+                            <div class="dx-widget-title">
+                                Categories | Tags
+                            </div>
+                            {% for t in tags %}
+                                <div>
+                                    {% if t == selected_tag %}
+                                        <strong><a href="{% url 'forum_with_tag' tag=t %}">{{ t }}</a></strong>
+                                    {% else %}
+                                        <a href="{% url 'forum_with_tag' tag=t %}">{{ t }}</a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+
+                        
+
+
+                        <div class="dx-widget dx-box dx-box-decorated">
+                            <div class="dx-widget-title">
+                                Latest
+                            </div>
+                            {% for topics in latest_topics %}
+                            <a href="{% url 'topic-detail' topics.id %}" class="dx-widget-link">
+                                <span class="dx-widget-link-text" style="font-weight: bold;">{{ topics.title }}</span>
+                                <span class="dx-widget-link-date">{{ topics.date_created|date }}</span>
+                            </a>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

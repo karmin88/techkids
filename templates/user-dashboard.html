@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="dx-main pb-100 bg-grey-6">
+    <header class="dx-header" style="margin: 30px;">
+        <div class="container">
+            <h1 style="text-align:center; margin:auto; color:#0019ff; font-weight:bold; padding:20px 40px; background-color:#9cff1e; border:1px solid #fff; inline-size:fit-content; border-radius: 10px;">
+                USER DASHBOARD
+        </div>
+    </header>
+
+        <div class="container">
+            <div class="row justify-content-center" style="margin-bottom: 30px;">
+                <div class="col-lg-4">
+                    <div class="dx-box-decorated">
+                        <div class="dx-box-content text-center">
+                            <h2 class="h4">Profile Picture</h2>
+                            <div class="dx-comment-img">
+                                <img style="width: 200px; height:200px; margin-bottom: 20px;" src="{{ user.author.profile_pic.url }}" alt=""
+                                    class="rounded-circle">
+                            </div>
+                            <div class="row text-center d-flex flex-column align-items-center" style="margin-top: 20px;">
+                                <i class="fa fa-bolt" style="margin: 0px 10px;" aria-hidden="true"></i>
+                                {% if user.author.is_doctor %}
+                                    Certified Expert
+                                {% else %}
+                                    General User
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center" style="margin: 30px;">
+                <div class="col-lg-12">
+                    <div class="dx-box-decorated">
+                        <div class="dx-box-content">
+                            {% if topic_count > 0 %}
+                            <h2 class="h4 text-center">Posted Topics</h2>
+                            <div class="table-responsive">
+                                <table class="dx-table dx-table-default">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">Views</th>
+                                            <th scope="col">Answers</th>
+                                            <th scope="col">Post Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for post in topic_posted %}
+                                        <tr>
+                                            <th scope="row">
+                                                <a href="{% url 'topic-detail' post.id %}"
+                                                    class="dx-table-default-title">{{ post.title }}</a>
+                                            </th>
+                                            <td>{{ post.topic_view_count }}</td>
+                                            <td>{{ post.answer_count }}</td>
+                                            <td>{{ post.date_created }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <h2 class="h4 text-center">You didn't post a topic yet!</h2>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" style="margin: 30px;">
+                <div class="col-lg-12">
+                    <div class="dx-box-decorated">
+                        <div class="dx-box-content">
+                            {% if ans_count > 0 %}
+                            <h2 class="h4 text-center">Posted Answers</h2>
+                            <div class="table-responsive">
+                                <table class="dx-table dx-table-default">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">Answers</th>
+                                            <th scope="col">Upvote</th>
+                                            <th scope="col">Downvote</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ans in ans_posted %}
+                                        <tr>
+                                            <th scope="row">
+                                                <a href="{% url 'topic-detail' ans.user_post.id %}"
+                                                    class="dx-table-default-title">{{ ans.user_post.title }}</a>
+
+                                            </th>
+                                            <td>{{ ans.content }}</td>
+                                            <td>{{ ans.upvotes.count }}</td>
+                                            <td>{{ ans.downvotes.count }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <h2 class="h4 text-center">You didn't answer in a topic yet!</h2>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+{% endblock content %}
